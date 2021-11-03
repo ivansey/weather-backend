@@ -31,7 +31,7 @@ function translateCity(city) {
 }
 
 app.post("/get/one", (req, res) => {
-	axios.get("https://api.openweathermap.org/data/2.5/weather?q=" + String(req.body.city) + "&lang=ru&appid=" + process.env.OWM_TOKEN).then((d) => {
+	axios.get("https://api.openweathermap.org/data/2.5/weather?q=" + String(req.body.city) + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then((d) => {
 		res.send({
 			weather: d.data,
 		})
@@ -45,7 +45,7 @@ app.post("/find", (req, res) => {
 	})
 		.then(translationResult => {
 			console.log(translationResult.result.translations[0].translation);
-			axios.get("https://api.openweathermap.org/data/2.5/find?q=" + translationResult.result.translations[0].translation + "&lang=ru&appid=" + process.env.OWM_TOKEN).then((dt) => {
+			axios.get("https://api.openweathermap.org/data/2.5/find?q=" + translationResult.result.translations[0].translation + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then((dt) => {
 				res.send(dt.data);
 			})
 		})
