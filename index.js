@@ -38,20 +38,28 @@ app.post("/get/one", (req, res) => {
 	})
 })
 
-app.post("/find", (req, res) => {
-	languageTranslator.translate({
-		text: req.body.city,
-		modelId: "ru-en",
+app.post("/locate/one", (req, res) => {
+	axios.get("https://api.openweathermap.org/data/2.5/weather?lat=" + req.body.lan + "&lon=" + req.body.lon + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then((d) => {
+		res.send({
+			weather: d.data,
+		})
 	})
-		.then(translationResult => {
-			console.log(translationResult.result.translations[0].translation);
-			axios.get("https://api.openweathermap.org/data/2.5/find?q=" + translationResult.result.translations[0].translation + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then((dt) => {
+})
+
+app.post("/find", (req, res) => {
+	// languageTranslator.translate({
+	// 	text: req.body.city,
+	// 	modelId: "ru-en",
+	// })
+	// 	.then(translationResult => {
+	// 		console.log(translationResult.result.translations[0].translation);
+			axios.get("https://api.openweathermap.org/data/2.5/find?q=" + encodeURIComponent(req.body.city) + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then((dt) => {
 				res.send(dt.data);
 			})
-		})
-		.catch(err => {
-			console.log('error:', err);
-		});
+		// })
+		// .catch(err => {
+		// 	console.log('error:', err);
+		// });
 
 
 })
