@@ -15,6 +15,9 @@
     "cyrillic-to-translit-js": "^3.1.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "google-translate": "^3.0.0",
+    "google-translate-api": "^2.3.0",
+    "ibm-watson": "^6.2.1",
     "openweather-apis": "^4.4.2",
     "openweathermap-apis": "^2.1.1"
   }
