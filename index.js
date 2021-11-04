@@ -39,7 +39,7 @@ app.post("/locate/one", (req, res) => {
 })
 
 app.post("/locate/period", (req, res) => {
-	axios.get("https://api.openweathermap.org/data/2.5/onecall?lat=" + dt.data[0].lat + "&lon=" + dt.data[0].lon + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then((d) => {
+	axios.get("https://api.openweathermap.org/data/2.5/onecall?lat=" + req.body.lan + "&lon=" + req.body.lon + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then((d) => {
 		res.send({
 			weather: d.data,
 		})
