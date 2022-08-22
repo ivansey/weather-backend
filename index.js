@@ -22,7 +22,7 @@ app.post("/get/one", (req, res) => {
 
 app.post("/get/period", (req, res) => {
 	axios.get("https://api.openweathermap.org/data/2.5/weather?q=" + String(req.body.city) + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then(dt => {
-		axios.get("https://api.openweathermap.org/data/2.5/onecall?lat=" + dt.data.coord.lat + "&lon=" + dt.data.coord.lon + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then((d) => {
+		axios.get("https://api.openweathermap.org/data/2.5/forecast?lat=" + dt.data.coord.lat + "&lon=" + dt.data.coord.lon + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then((d) => {
 			res.send({
 				weather: d.data,
 			})
@@ -39,7 +39,8 @@ app.post("/locate/one", (req, res) => {
 })
 
 app.post("/locate/period", (req, res) => {
-	axios.get("https://api.openweathermap.org/data/2.5/onecall?lat=" + req.body.lan + "&lon=" + req.body.lon + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then((d) => {
+	axios.get("https://api.openweathermap.org/data/2.5/forecast?lat=" + req.body.lan + "&lon=" + req.body.lon + "&lang=ru&units=metric&appid=" + process.env.OWM_TOKEN).then((d) => {
+
 		res.send({
 			weather: d.data,
 		})
